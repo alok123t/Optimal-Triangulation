@@ -34,11 +34,10 @@ function distance(p0, p1) {
   return (dx*dx) + (dy*dy);
 }
 
-
 svg_polygon.on("click", function() {
-  var done = false;
-  var pos = d3.mouse(this);
+  var pos = adjust(d3.mouse(this));
   var curPoint = pos;
+  var done = false;
   if (points.length >= 3) {
     var d = distance(pos, points[0]);
     if (d < 2000) {
@@ -52,10 +51,9 @@ svg_polygon.on("click", function() {
     points.push(curPoint);
   }
   g_edges.select("#path_poly").datum(points).attr("d", line_gen);
+
   var g_n = g_nodes.append("g").attr("class", "vertex").translate(curPoint);
   g_n.append("circle").attr("r", 20).style({stroke: "black"});
   var curText = done ? 1 : points.length;
   g_n.append("text").text(curText.toString()).attr("dy", "4px").style("font-size", "20px");
-  if (done) return;
-  // console.log(points);
 });
