@@ -6,24 +6,29 @@ var width = intViewportWidth - margin.left - margin.right;
 var height = intViewportHeight - margin.top - margin.bottom;
 // console.log("width", width, "height", height);
 
-d3.selection.prototype.translate = function(a, b) {
-  return this.attr("transform", "translate(" + a + ")");
-};
-
 var svg_polygon = d3.select("#polygon")
   .attr("width", width + margin.right)
   .attr("height", height + margin.bottom);
 
+var svg_line = d3.line();
+
 var g_nodes = svg_polygon.append("g");
 var g_edges = svg_polygon.append("g");
-g_edges.append("path").attr("id", "path_poly").style("stroke-opacity", 0.5);
+g_edges.append("path")
+  .attr("id", "path_poly");
+var tr_edges = svg_polygon.append("g");
+
+var thresholdSamePoint = 2000;
 
 var points = [];
+var done = false;
 
-var line_gen = d3.line();
+d3.selection.prototype.translate = function(a) {
+  return this.attr("transform", "translate(" + a + ")");
+};
 
 function adjust(p) {
-  return [p[0]-10, p[1]-10];
+  return [Math.round(p[0]), Math.round(p[1])];
 }
 
 function distance(p0, p1) {
@@ -32,26 +37,62 @@ function distance(p0, p1) {
   return (dx*dx) + (dy*dy);
 }
 
-svg_polygon.on("click", function() {
-  var pos = adjust(d3.mouse(this));
-  var curPoint = pos;
-  var done = false;
-  if (points.length >= 3) {
-    var d = distance(pos, points[0]);
-    if (d < 2000) {
-      curPoint = points[0];
-      points.push(curPoint);
-      points[points.length-1] = points[0];
-      done = true;
+function tooClose(p) {
+  var i = points.length == 1 ? 0 : 1;
+  for (; i < points.length; i++) {
+    if (distance(points[i], p) < thresholdSamePoint) return true;
+  }
+  return false;
+}
+
+function closePolygon(pEnd) {
+  var pStart = points[0];
+  var d = distance(pStart, pEnd);
+  return d < thresholdSamePoint;
+}
+
+function addPoint(p) {
+  points.push(p);
+
+  g_edges.select("#path_poly")
+    .datum(points)
+    .attr("d", svg_line);
+
+  var curText = done ? 1 : points.length;
+  var g_n = g_nodes.append("g")
+    .attr("class", "vertex")
+    .translate(p);
+  g_n.append("circle")
+    .attr("r", 20);
+  g_n.append("text").text(curText.toString())
+    .attr("dx", "-5px")
+    .attr("dy", "5px");
+}
+
+function triangulate() {
+  for (var i = 0; i < points.length; i+=2) {
+    var tr_nodes = [];
+    if (i+2 < points.length) {
+      tr_nodes.push(points[i]);
+      tr_nodes.push(points[i+2]);
+      tr_edges.append("path")
+        .datum(tr_nodes)
+        .attr("id", "path_tr")
+        .attr("d", svg_line);
     }
   }
-  if (!done) {
-    points.push(curPoint);
-  }
-  g_edges.select("#path_poly").datum(points).attr("d", line_gen);
+}
 
-  var g_n = g_nodes.append("g").attr("class", "vertex").translate(curPoint);
-  g_n.append("circle").attr("r", 20).style({stroke: "black"});
-  var curText = done ? 1 : points.length;
-  g_n.append("text").text(curText.toString()).attr("dy", "4px").style("font-size", "20px");
+svg_polygon.on("click", function() {
+  if (done) return;
+  var newPoint = adjust(d3.mouse(this));
+  if (tooClose(newPoint)) return;
+  if (points.length >= 3) {
+    if (closePolygon(newPoint)) {
+      done = true;
+      newPoint = points[0];
+    }
+  }
+  addPoint(newPoint);
+  if (done) triangulate();
 });

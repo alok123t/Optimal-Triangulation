@@ -1,20 +1,24 @@
-rect.bg {
-  stroke-width: 1px;
-  /*fill: #FFF;*/
+h1 {
+  font-family: 'Roboto', sans-serif;
 }
 
 path {
   fill: none;
   stroke: black;
   stroke-width: 5;
+  stroke-opacity: 0.5;
 }
 
-.vertex circle {
-  fill: rgb(255, 119, 119);
-  stroke: yellow;
+#path_tr {
+  stroke: dodgerblue;
+  stroke-width: 10;
 }
 
 circle {
-    fill: red;
+    fill: lightcoral;
     stroke: black;
+}
+
+text {
+  font-size: 25px;
 }
