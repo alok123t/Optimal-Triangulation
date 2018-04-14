@@ -4,23 +4,3 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-intViewportWidth	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var intViewportWidth = window.innerWidth;$/;"	variable	line:2
-intViewportHeight	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var intViewportHeight = window.innerHeight;$/;"	variable	line:3
-margin.top	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var margin = {top: 20, right: 50, bottom: 30, left: 60};$/;"	property	line:4
-margin.right	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var margin = {top: 20, right: 50, bottom: 30, left: 60};$/;"	property	line:4
-margin.bottom	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var margin = {top: 20, right: 50, bottom: 30, left: 60};$/;"	property	line:4
-margin.left	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var margin = {top: 20, right: 50, bottom: 30, left: 60};$/;"	property	line:4
-width	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var width = intViewportWidth - margin.left - margin.right;$/;"	variable	line:5
-height	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var height = intViewportHeight - margin.top - margin.bottom;$/;"	variable	line:6
-translate	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^d3.selection.prototype.translate = function(a, b) {$/;"	function	line:9
-d3.selection	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var height = intViewportHeight - margin.top - margin.bottom;$/;"	class	line:6
-d3.selection.translate	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^d3.selection.prototype.translate = function(a, b) {$/;"	method	line:9
-svg_polygon	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var svg_polygon = d3.select("#polygon")$/;"	variable	line:15
-g_nodes	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var g_nodes = svg_polygon.append("g");$/;"	variable	line:19
-g_edges	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var g_edges = svg_polygon.append("g");$/;"	variable	line:20
-points	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var points = [];$/;"	variable	line:23
-line_gen	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^var line_gen = d3.line();$/;"	variable	line:25
-adjust	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^function adjust(p) {$/;"	function	line:27
-adjust	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^function adjust(p) {$/;"	function	line:27
-distance	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^function distance(p0, p1) {$/;"	function	line:31
-distance	/Users/alok/Documents/GitHub/Optimal-Triangulation/triangulation.js	/^function distance(p0, p1) {$/;"	function	line:31
