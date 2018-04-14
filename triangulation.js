@@ -7,9 +7,7 @@ var height = intViewportHeight - margin.top - margin.bottom;
 // console.log("width", width, "height", height);
 
 d3.selection.prototype.translate = function(a, b) {
-  return arguments.length === 1 ?
-        this.attr("transform", "translate(" + a + ")")
-      : this.attr("transform", "translate(" + a + "," + b + ")");
+  return this.attr("transform", "translate(" + a + ")");
 };
 
 var svg_polygon = d3.select("#polygon")
